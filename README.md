@@ -1,0 +1,1 @@
+# insync-nagios-theme
