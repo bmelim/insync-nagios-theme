@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nagios Network Monitoring</title>
+  <!-- Admin LTE -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+  folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+  <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style>
+@media screen and (max-width:767px) {
+.main-sidebar,.left-side {
+  -webkit-transform:translate(0px, 0);
+  -ms-transform:translate(0px, 0);
+  -o-transform:translate(0px, 0);
+  transform:translate(0px, 0)}}
+</style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+
+  <div class="wrapper">
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" style="padding-top:0px">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- search form -->
+        <form action="/nagios/cgi-bin/status.cgi" method="get" class="sidebar-form" target="main">
+          <div class="input-group">
+            <input id="search" type="text" name="host" class="form-control" placeholder="Search...">
+            <input type="hidden" name="navbarsearch" value="1" />
+            <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+          </div>
+        </form>
+
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+          <li class="header">CURRENT STATUS</li>
+          <li class="active treeview">
+            <a href="/nagios/cgi-bin/tac.cgi" target="main">
+              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/status.cgi?hostgroup=all&amp;style=overview" target="main">
+              <i class="fa fa-diamond"></i> <span>Host Group Overview</span>
+            </a>
+          </li>
+
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/status.cgi?servicegroup=all&amp;style=overview" target="main">
+              <i class="fa fa-database"></i> Service Group Overview
+            </a>
+          </li>
+
+          <!-- <li>
+            <a href="/nagios/cgi-bin/status.cgi?servicegroup=all&amp;style=overview" target="main">
+              <i class="fa fa-circle-o"></i> Servicegroup Overview
+            </a>
+          </li> -->
+
+          <!-- <li class="treeview">
+            <a href="#">
+              <i class="fa fa-diamond"></i> <span>Overview</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/nagios/cgi-bin/status.cgi?hostgroup=all&amp;style=overview" target="main">
+                  <i class="fa fa-circle-o"></i> Hostgroup Overview
+                </a>
+              </li>
+              <li>
+                <a href="/nagios/cgi-bin/status.cgi?servicegroup=all&amp;style=overview" target="main">
+                  <i class="fa fa-circle-o"></i> Servicegroup Overview
+                </a>
+              </li>
+            </ul>
+          </li> -->
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-files-o"></i> <span>Details</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/nagios/cgi-bin/status.cgi?hostgroup=all&amp;style=hostdetail" target="main">
+                  <i class="fa fa-circle-o"></i> Host Details
+                </a>
+              </li>
+              <li>
+                <a href="/nagios/cgi-bin/status.cgi?host=all" target="main">
+                  <i class="fa fa-circle-o"></i> Service Details
+                </a>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-bell-o"></i> <span>Problems</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/nagios/cgi-bin/status.cgi?hostgroup=all&amp;style=hostdetail&amp;hoststatustypes=12" target="main">
+                  <i class="fa fa-circle-o"></i> Host Problems
+                </a>
+              </li>
+              <li>
+                <a href="/nagios/cgi-bin/status.cgi?host=all&amp;servicestatustypes=28" target="main">
+                  <i class="fa fa-circle-o"></i> Service Problems
+                </a>
+              </li>
+            </ul>
+          </li>
+          
+          
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/statusmap.cgi?host=all" target="main">
+              <i class="fa fa-map-o"></i>
+              <span>Status Map</span>
+            </a>
+          </li>
+          
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/outages.cgi" target="main">
+              <i class="fa fa-fire"></i>
+              <span>Network Outages</span>
+            </a>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-bullhorn"></i> <span>System Information</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/nagios/cgi-bin/extinfo.cgi?type=0" target="main">
+                  <i class="fa fa-circle-o"></i> Process Info
+                </a>
+              </li>
+              <li>
+                <a href="/nagios/cgi-bin/extinfo.cgi?type=4" target="main">
+                  <i class="fa fa-circle-o"></i> Performance Info
+                </a>
+              </li>
+              <li>
+                <a href="/nagios/cgi-bin/extinfo.cgi?type=7" target="main">
+                  <i class="fa fa-circle-o"></i> Scheduling Queue
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-rocket"></i> <span>Extras</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/nagios/cgi-bin/extinfo.cgi?type=3" target="main">
+                  <i class="fa fa-circle-o"></i> Comments
+                </a>
+              </li>
+              <li>
+                <a href="/nagios/cgi-bin/extinfo.cgi?type=6" target="main">
+                  <i class="fa fa-circle-o"></i> Downtime
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="header">REPORTING</li>
+
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/trends.cgi" target="main">
+              <i class="fa fa-line-chart"></i>
+              <span>Trends</span>
+            </a>
+          </li>
+
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/avail.cgi" target="main">
+              <i class="fa fa-hourglass-half"></i>
+              <span>Availability</span>
+            </a>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-flag-o"></i> <span>Alerts</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="/nagios/cgi-bin/histogram.cgi" target="main">
+                  <i class="fa fa-circle-o"></i> Alert Histogram
+                </a>
+              </li>
+              <li>
+                <a href="/nagios/cgi-bin/history.cgi?host=all" target="main">
+                  <i class="fa fa-circle-o"></i> Alert History
+                </a>
+              </li>
+              <li>
+                <a href="/nagios/cgi-bin/summary.cgi" target="main">
+                  <i class="fa fa-circle-o"></i> Alert Summary
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- <li class="treeview">
+            <a href="/nagios/cgi-bin/histogram.cgi" target="main">
+              <i class="fa fa-share"></i>
+              <span>Alert Histogram</span>
+            </a>
+          </li> -->
+
+          <!-- <li class="treeview">
+            <a href="/nagios/cgi-bin/history.cgi?host=all" target="main">
+              <i class="fa fa-share"></i>
+              <span>Alert History</span>
+            </a>
+          </li> -->
+
+          <!-- <li class="treeview">
+            <a href="/nagios/cgi-bin/summary.cgi" target="main">
+              <i class="fa fa-share"></i>
+              <span>Alert Summary</span>
+            </a>
+          </li> -->
+
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/notifications.cgi?contact=all" target="main">
+              <i class="fa fa-list-ul"></i>
+              <span>Notifications</span>
+            </a>
+          </li>
+
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/showlog.cgi" target="main">
+              <i class="fa fa-history"></i>
+              <span>Event Log</span>
+            </a>
+          </li>
+
+          <!-- <li class="header">EXTRA</li> -->
+          
+
+          <li class="header">CONFIGURATION</li>
+
+          <li class="treeview">
+            <a href="/nagios/cgi-bin/config.cgi" target="main">
+              <i class="fa fa-file-text-o"></i>
+              <span>View Config</span>
+            </a>
+          </li>
+
+          <li class="header">DOCUMENTATION</li>
+
+          <li class="treeview">
+            <a href="https://go.nagios.com/nagioscore/docs" target="main">
+              <i class="fa fa-book"></i>
+              <span>Read Documentation</span>
+            </a>
+          </li>
+          
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- <div class="content-wrapper">
+      <section class="content-header">
+        <h1>
+          Dashboard
+          <small>Control panel</small>
+        </h1>
+
+
+      </section>
+
+    </div> -->
+</div><!-- ./wrapper -->
+
+<!-- jQuery 2.1.4 -->
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+$.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- Morris.js charts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+</body>
+</html>
